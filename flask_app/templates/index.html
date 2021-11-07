@@ -46,6 +46,7 @@
         <!-- //// RIGHT COLUMN /////////////////////////////////// -->
         <div class="col-8 bg-dark rounded p-2">
           <form action='/post' method='post'>
+            <!-- **** NAME INPUT ******** -->
             <div class="form-group mb-2">
               <label class="form-label" for="name">Name:</label>
               <input class="form-control" type="text" id="name" name="name">
@@ -55,6 +56,12 @@
                 </p>
               {% endfor %}
             </div>
+            <!-- **** EMAIL INPUT ******** -->
+            <div class="form-group mb-2">
+              <label class="form-label" for="email">Email :</label>
+               <input class="form-control" type="email" id="email" name="email">
+            </div>
+            <!-- **** LOCATION DROP DOWWN ******* -->
             <div class="form-group  mb-2">
               <label class="form-label" for="location">Location:<label>
                 <select class="form-control" id="location" name="location">
@@ -66,6 +73,7 @@
                   <option value="New York">New York</option>
                 </select>
             </div>
+            <!-- **** FAVORITE LANGUAGE SELECTOR ******** -->
             <div class="form-group mb-2">
               <label for="fav_language">Favorite Language:<label>
                 <select class="form-control" id="fav_language" name="fav_language">
@@ -77,6 +85,7 @@
                   <option value="C#">C#</option>
                 </select>
             </div>
+            <!-- **** COMMENTS TEXT AREA ******** -->
             <div class="form-group mb-2">
               <label class="form-label" for="comment">Comment:</label>
               <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
