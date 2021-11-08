@@ -1,15 +1,18 @@
 # import the function that will return an instance of a connection ////////
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+import re
 
-TARGETDATABASE = 'dojo_survey_db'                                                # Designates the database we are using
-TABLENAME = "users"                                                     # Designates the table we are using
+TARGETDATABASE = 'dojo_survey_db'                                               # Designates the database we are using
+TABLENAME = "users"                                                             # Designates the table we are using
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')      # Pattern for email validatiom
 
 # //// USERS CLASS ////////////////////////////////////////////////////////
 class Users:
     def __init__( self , data ):                                        # Constructor function
         self.id = data['id']
         self.name = data['name']
+        self.email = data['email']
         self.location = data['location']
         self.fav_language = data['fav_language']
         self.comment = data['comment']
@@ -21,9 +24,15 @@ class Users:
     @staticmethod
     def validate_user_create_data(data:dict):
         is_valid = True
+        # //// Validate User Name ///////
         if len(data['name']) < 3:
             flash("Name must be at least 3 characters in length","error_user_name")
             is_valid = False
+        # //// Validate User Email ////////
+        if not EMAIL_REGEX.match(data['email']):
+            flash("Invalid email address", "error_user_email")
+            is_valid = False
+        # //// Validate User Comments
         if len( data['comment'] ) < 3:
             flash("Comment must ve at least 3 characters in length","error_user_comment")
             is_valid = False
@@ -38,7 +47,7 @@ class Users:
     # @returns ID of created user
     @classmethod
     def create(cls, data ):
-        query = "INSERT INTO " + TABLENAME +" ( name, location , fav_language , comment) VALUES ( %(name)s , %(location)s , %(fav_language)s, %(comment)s );"
+        query = "INSERT INTO " + TABLENAME +" ( name, email, location , fav_language , comment) VALUES ( %(name)s ,%(email)s, %(location)s , %(fav_language)s, %(comment)s );"
         # data is a dictionary that will be passed into the save method from server.py
         return connectToMySQL(TARGETDATABASE).query_db( query, data )
         

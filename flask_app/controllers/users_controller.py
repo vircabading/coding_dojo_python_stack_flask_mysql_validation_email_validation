@@ -22,9 +22,10 @@ def post():
     print("**** In / Post Retrieval **************")
     data = {                                                            # Create Data Dictionary from values in form
         'name': request.form['name'],
+        'email': request.form['email'],
         'location': request.form['location'],
-        'comment' : request.form['comment'],
-        'fav_language': request.form['fav_language']
+        'fav_language': request.form['fav_language'],
+        'comment' : request.form['comment']
     }
     print(data)
 
@@ -36,7 +37,10 @@ def post():
 
     user = users_model.Users.get_one(data)                              # get an instance of the created user
     ("Newly created user instance: ", user)
-    return render_template("user_show.html", user = user)
+
+    print("**** Retrieving All Users *******************")
+    all_users = users_model.Users.get_all()                             # Get all instances of users from the database
+    return render_template("user_show.html", user = user, all_users = all_users)
 
 # //// RETRIEVE ////////////////////////////////////
 

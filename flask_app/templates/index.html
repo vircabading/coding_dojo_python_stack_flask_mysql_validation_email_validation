@@ -60,6 +60,11 @@
             <div class="form-group mb-2">
               <label class="form-label" for="email">Email :</label>
                <input class="form-control" type="email" id="email" name="email">
+               {% for message in get_flashed_messages(category_filter='error_user_email')  %}   <!-- Displays any existing Error Messages-->
+                 <p class="alert alert-danger">
+                   {{ message }}
+                 </p>
+               {% endfor %}
             </div>
             <!-- **** LOCATION DROP DOWWN ******* -->
             <div class="form-group  mb-2">

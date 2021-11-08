@@ -38,22 +38,45 @@
         </div>
         <!-- //// RIGHT COLUMN /////////////////////////////////// -->
         <div class="col-8 bg-dark rounded p-2">
-            <div class="row">
-                <strong>Name: </strong>
-                <p>{{ user.name }}</p>
-            </div>
-            <div class="row">
-                <strong>Location: </strong>
-                <p>{{ user.location }}</p>
-            </div>
-            <div class="row">
-                <strong>Favorite Language: </strong>
-                <p>{{ user.fav_language }}</p>
-            </div>
-            <div class="row">
-                <strong>Comment: </strong>
-                <p>{{ user.comment }}</p>
-            </div>
+          <div class="row">
+            <strong>Name: </strong>
+            <p>{{ user.name }}</p>
+          </div>
+          <div class="row">
+            <strong>Email: </strong>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="row">
+            <strong>Location: </strong>
+            <p>{{ user.location }}</p>
+          </div>
+          <div class="row">
+            <strong>Favorite Language: </strong>
+            <p>{{ user.fav_language }}</p>
+          </div>
+          <div class="row">
+            <strong>Comment: </strong>
+            <p>{{ user.comment }}</p>
+          </div>
+          <hr>
+          <table class="table"> 
+            <thead class="thead thead-dark">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Favorite_Language</th>
+              </tr>
+            </thead>
+            {% for user in all_users %}           <!-- when iterating list of dictionaries, get a dict as each user not an index! -->
+              <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.location }}</td>
+                <td>{{ user.fav_language }}</td>
+              </tr>
+            {% endfor %}
+          </table>
         </div>
       </div>
     </div>
